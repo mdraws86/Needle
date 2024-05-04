@@ -1,5 +1,5 @@
 from Needle import Needle
-import math
+import numpy as np
 
 class Table:
     def __init__(self, distance_lines: float) -> None:
@@ -46,28 +46,29 @@ class Table:
         # Update variables
         self.n_needles = n_needles
         self.needle_length = needle_length
+        
+        angle = []
+        dist_next = []
 
         # Drop needles on the table
         for iteration in range(self.n_needles):
             needle = Needle(self.needle_length)
             # Let needle fall
-            position, angle = needle.fall(self.distance_lines)
+            angle += [needle.fall(self.distance_lines)[1]]
 
             # Get distnace between the needle's middle and the next line on the table
-            needle.get_distance_to_next_line(self.distance_lines)
+            dist_next += [needle.get_distance_to_next_line(self.distance_lines)]
+        
+        # Make lists to numpy arrays
+        angle = np.array(angle)
+        dist_next = np.array(dist_next)
 
-            # Use trigonometrics to compute the hypothenuse's length
-            # In case the needle falls a perpendicular to the line on the table
-            if angle == 0:
-                len_h = needle.length/2
-                # In case the needle lies parallel to the line on the table it can never cross it
-                len_h = needle.length + 1
-            else:
-                len_h = needle.dist_next/math.cos(angle)
+        # Elementwise calculation of the hypotenuse's length
+        len_h = dist_next / np.cos(angle)
+        # Needle crosses line if the length of the hypotenuse is less or equal to half of the length of th needle
+        n_crossing = len(len_h[len_h <= self.needle_length/2])
 
-            # If the hypothenuse's length is less or equal than half of the needle's length the needle crosses the line on the table
-            if len_h <= needle.length/2:
-                self.n_crossing += 1
+        self.n_crossing = n_crossing
 
         # Update probability
         self.probability = self.n_crossing / self.n_needles

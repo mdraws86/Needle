@@ -50,15 +50,16 @@ class Needle:
 
         return (self.position, self.angle)
     
-    def get_distance_to_next_line(self, distance_lines: float) -> None:
+    def get_distance_to_next_line(self, distance_lines: float) -> float:
         '''Method to determine the distance between the needle's middle and the next line on the table.
         
         Input:
             distance_lines [float]: the distance between two parallel lines on the table.
 
         Output:
-            None
+            dist_next [float]: distance to the next line on the table
         '''
 
         min_distance = min(distance_lines - self.position, self.position)
         self.dist_next = min_distance
+        return self.dist_next
