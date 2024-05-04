@@ -48,6 +48,9 @@ class Needle:
         # Randomly define an angle the needle has to the next line between 0 and 90 degrees
         self.angle = random.uniform(0, math.pi/2)
 
+        # Update distance to next line
+        self.dist_next = self.get_distance_to_next_line(distance_lines)
+
         return (self.position, self.angle)
     
     def get_distance_to_next_line(self, distance_lines: float) -> float:

@@ -47,21 +47,17 @@ class Table:
         self.n_needles = n_needles
         self.needle_length = needle_length
         
-        angle = []
-        dist_next = []
+        angle = np.array([])
+        dist_next = np.array([])
 
         # Drop needles on the table
         for iteration in range(self.n_needles):
             needle = Needle(self.needle_length)
             # Let needle fall
-            angle += [needle.fall(self.distance_lines)[1]]
+            angle = np.append(angle, needle.fall(self.distance_lines)[1])
 
             # Get distnace between the needle's middle and the next line on the table
-            dist_next += [needle.get_distance_to_next_line(self.distance_lines)]
-        
-        # Make lists to numpy arrays
-        angle = np.array(angle)
-        dist_next = np.array(dist_next)
+            dist_next = np.append(dist_next, needle.dist_next)
 
         # Elementwise calculation of the hypotenuse's length
         len_h = dist_next / np.cos(angle)
