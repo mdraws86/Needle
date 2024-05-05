@@ -1,7 +1,7 @@
 # Simulation experiment with needles
 
 ## Blogpost
-Please consider to also read my blogpost on [Medium](https://medium.com/@ma.draws/boston-or-seattle-an-airbnb-perspective-df0ababbbeb6).
+Please consider to also read my blogpost on [Medium](https://medium.com/@ma.draws/simulation-experiment-with-needles-c4a5dbf5f3e1).
 
 ## Authors and Licensing
 - Author: Martin Draws
@@ -9,7 +9,7 @@ Please consider to also read my blogpost on [Medium](https://medium.com/@ma.draw
 - License [MIT License](https://opensource.org/license/mit)
 
 ## Motivation
-The problem discussed here might be odd and seem useless. But the aim of this package is to show that an apparently complex challenge can be broken down into mathematical expressions to answer a certain question.
+The problem discussed here might seem random. But the aim of this package is to show that an apparently complex challenge can be broken down into mathematical expressions to answer a certain question.
 
 # Task
 Imagine the following situation. You have a table with parallel lines on it. The distance between these lines is constant across the table.
@@ -26,3 +26,15 @@ python -m pip install drop-needle
 ```
 
 ## Functionality
+After installation the package can be loaded.
+
+````
+from drop_needle.Table import Table
+
+# Initialize a table with a distance of 10 between the lines
+table = Table(10)
+
+# Simulate 10,000 needles with a length of 7 falling on the table
+table.simulate(10000, 7)
+0.4401
+````
