@@ -1,4 +1,4 @@
-from Needle import Needle
+from drop_needle.Needle import Needle
 import numpy as np
 
 class Table:
